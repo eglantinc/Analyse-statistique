@@ -10,8 +10,14 @@ typedef struct Node {
 typedef struct LinkedList{
     struct Node *head;
     struct Node *tail;
-    int nombre_noeud;
+    int word_count;
 } LinkedList;
+
+void initialize_list(LinkedList *word_list) {
+    word_list->head = NULL;
+    word_list->tail = NULL;
+    word_list->word_count = 0;
+}
 
 struct Node* create_node(char *new_word) {
     struct Node* new_node = (struct Node*)malloc(sizeof(Node));
