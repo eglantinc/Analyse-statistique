@@ -18,6 +18,12 @@ void initialize_list(LinkedList *word_list) {
     word_list->tail = NULL;
     word_list->word_count = 0;
 }
+void insert_into_empty_list(LinkedList *listPtr, Node *new_node) {
+    if (listPtr->word_count == 0) {
+        listPtr->head = new_node;
+        listPtr->tail = new_node;
+    }
+}
 
 struct Node* create_node(char *new_word) {
     struct Node* new_node = (struct Node*)malloc(sizeof(Node));
@@ -40,14 +46,6 @@ struct Node* create_node(char *new_word) {
 
     return new_node;
 }
-
-
-
-
-
-
-
-
 
 
 
