@@ -18,10 +18,25 @@ void initialize_list(LinkedList *word_list) {
     word_list->tail = NULL;
     word_list->word_count = 0;
 }
-void insert_into_empty_list(LinkedList *listPtr, Node *new_node) {
-    if (listPtr->word_count == 0) {
-        listPtr->head = new_node;
-        listPtr->tail = new_node;
+
+void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
+    if (word_list->word_count == 0) {
+        word_list->head = new_node;
+        word_list->tail = new_node;
+    }
+}
+
+void print_list(LinkedList *word_list) {
+    if (word_list->word_count == 0) {
+        printf("La liste de mot est vide");
+        return;
+    }
+
+    Node *current = word_list->head;;
+
+    while (current != NULL) {
+        printf("%s\n", current->word);
+        current = current->next;
     }
 }
 
@@ -46,7 +61,6 @@ struct Node* create_node(char *new_word) {
 
     return new_node;
 }
-
 
 
 
