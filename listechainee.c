@@ -23,6 +23,7 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
     if (word_list->word_count == 0) {
         word_list->head = new_node;
         word_list->tail = new_node;
+        word_list->word_count++;
     }
 }
 
