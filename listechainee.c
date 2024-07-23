@@ -27,6 +27,27 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
     }
 }
 
+void delete_duplicate(LinkedList *word_list) {
+    Node *current = word_list->head;
+    while (current != NULL && current->next != NULL) {
+        if (strcmp(current->word, current->next->word) == 0) {
+            
+            Node *duplicate = current->next;
+            current->next = duplicate->next;
+            word_list->word_count--;
+            
+            free(duplicate->word);
+            free(duplicate);
+
+            if (current->next == NULL) {
+                word_list->tail = current;
+            }
+        } else {
+            current = current->next;
+        }
+    }
+}
+
 void print_list(LinkedList *word_list) {
     if (word_list->word_count == 0) {
         printf("La liste de mot est vide");
