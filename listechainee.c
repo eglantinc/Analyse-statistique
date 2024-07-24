@@ -84,5 +84,37 @@ struct Node* create_node(char *new_word) {
     return new_node;
 }
 
+void insert_in_order(LinkedList *word_list, char *new_word) {
+    Node *newNodePtr = create_node(new_word);
+
+    if (word_list->word_count == 0) {
+        word_list->head = newNodePtr;
+        word_list->tail = newNodePtr;
+        word_list->word_count++;
+        return;  
+    }
+
+    Node *current = word_list->head;
+    Node *previous = NULL;
+
+    while (current != NULL && strcmp(current->word, newNodePtr->word) <= 0) {
+        previous = current;
+        current = current->next;
+    }
+
+    if (previous == NULL) {
+        newNodePtr->next = word_list->head;
+        word_list->head = newNodePtr;
+    } else {
+        previous->next = newNodePtr;
+        newNodePtr->next = current;
+
+        if (current == NULL) {
+            word_list->tail = newNodePtr;
+        }
+    }
+
+    word_list->word_count++;
+}
 
 
