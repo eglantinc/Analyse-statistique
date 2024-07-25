@@ -1,17 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-typedef struct Node {
-    char *word;
-    struct Node* next;
-} Node;
-
-typedef struct LinkedList{
-    struct Node *head;
-    struct Node *tail;
-    int word_count;
-} LinkedList;
+#include "listechainee.h"
 
 void initialize_list(LinkedList *word_list) {
     word_list->head = NULL;
@@ -20,7 +10,7 @@ void initialize_list(LinkedList *word_list) {
 }
 
 
-void print_empty_list_message(LinkedList *word_list) {
+void print_empty_list_message(const LinkedList *word_list) {
     if (word_list->word_count == 0) {
         printf("La liste de mot est vide");
         return;
@@ -50,7 +40,7 @@ void delete_duplicate(LinkedList *word_list) {
 }
 
 
-void print_list(LinkedList *word_list) {
+void print_list(const LinkedList *word_list) {
     print_empty_list_message(word_list);
     Node *current = word_list->head;;
 
@@ -60,7 +50,7 @@ void print_list(LinkedList *word_list) {
     }
 }
 
-struct Node* create_node(char *new_word) {
+struct Node* create_node(const char *new_word) {
     struct Node* new_node = (struct Node*)malloc(sizeof(Node));
     
     if (new_node == NULL) {
@@ -92,7 +82,7 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
     }
 }
 
-void insert_in_order(LinkedList *word_list, char *new_word) {
+void insert_in_order(LinkedList *word_list, const char *new_word) {
     Node *new_node = create_node(new_word);
 
     insert_into_empty_list(word_list, new_node);
