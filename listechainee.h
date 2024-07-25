@@ -55,12 +55,14 @@ void print_list(const LinkedList *word_list);
 
 /**
  * Cree un noeud
+ *
  * @param *new_word Le nouveau mot qui sera dans le noeud
  */
 Node* create_node(const char *new_word);
 
 /**
  * Ajoute un noeud dans une liste vide
+ *
  * @param *word_list La liste de mots
  * @param *new_node noeud a ajouter
  */
@@ -68,10 +70,19 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node);
 
 /**
  * Ajoute un nouveau mot dans une liste
+ *
  * @param *word_list La liste de mots
  * @param *new_node La nouveau mot a ajouter
  */
 void insert_in_order(LinkedList *word_list, const char *new_word);
+
+/**
+ * Libere allocation de memoire de chaque noeud 
+ * de la liste de mots
+ *
+ * @params *head Un pointeur sur la tete de la liste
+ */
+void free_list(Node *head);
 
 #endif 
 

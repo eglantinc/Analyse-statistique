@@ -39,6 +39,17 @@ void delete_duplicate(LinkedList *word_list) {
     }
 }
 
+void free_word_list(Node *head) {
+    Node *current = head;
+    Node *next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current->word); 
+        free(current);
+        current = next;
+    }
+}
 
 void print_list(const LinkedList *word_list) {
     print_empty_list_message(word_list);
