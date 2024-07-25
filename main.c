@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include "listechainee.h"
 
 #define USAGE "NAME\n" \
                "    %s - Trie une liste de mots provenant d’un fichier d’entrée.\n" \
@@ -10,7 +11,7 @@
                "    sans doublons sur stdout.\n" \
                "\n" \
                "SYNOPSIS\n" \
-               "    %s entree.txt [-S sortie.txt]\n" \
+               "    ./%s entree.txt [-S sortie.txt]\n" \
                "\n" \
                "DESCRIPTION\n" \
                "    entree.txt\n" \
@@ -19,11 +20,21 @@
                "        (Optionnel) Génère des statistiques et les enregistre\n" \
                "        dans le fichier de sortie spécifié.\n"
 
+void afficher_manuel(void) {
+    fprintf(stderr, USAGE, "tri", "tri");
+}
 
+void validate_argc(int argc, char **argv) {
+    if (argc != 2 && argc != 4) {
+        fprintf(stderr, "Ce programme prends soit 2 arguments, soit 4 arguments.\n");
+        afficher_manuel();
+        exit(EXIT_FAILURE);
+    }
+
+} 
 
 int main (int argc, char **argv) {
-    
-
+    validate_argc(argc, argv);
 
 return 0;
 }
