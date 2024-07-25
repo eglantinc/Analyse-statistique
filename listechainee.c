@@ -27,7 +27,15 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
     }
 }
 
+void print_empty_list_message(LinkedList *word_list) {
+    if (word_list->word_count == 0) {
+        printf("La liste de mot est vide");
+        return;
+    }
+}
+
 void delete_duplicate(LinkedList *word_list) {
+    print_empty_list_message(word_list);
     Node *current = word_list->head;
     while (current != NULL && current->next != NULL) {
         if (strcmp(current->word, current->next->word) == 0) {
@@ -48,12 +56,9 @@ void delete_duplicate(LinkedList *word_list) {
     }
 }
 
-void print_list(LinkedList *word_list) {
-    if (word_list->word_count == 0) {
-        printf("La liste de mot est vide");
-        return;
-    }
 
+void print_list(LinkedList *word_list) {
+    print_empty_list_message(word_list);
     Node *current = word_list->head;;
 
     while (current != NULL) {
@@ -84,12 +89,13 @@ struct Node* create_node(char *new_word) {
     return new_node;
 }
 
+
 void insert_in_order(LinkedList *word_list, char *new_word) {
-    Node *newNodePtr = create_node(new_word);
+    Node *new_node = create_node(new_word);
 
     if (word_list->word_count == 0) {
-        word_list->head = newNodePtr;
-        word_list->tail = newNodePtr;
+        word_list->head = new_node;
+        word_list->tail = new_node;
         word_list->word_count++;
         return;  
     }
@@ -97,20 +103,20 @@ void insert_in_order(LinkedList *word_list, char *new_word) {
     Node *current = word_list->head;
     Node *previous = NULL;
 
-    while (current != NULL && strcmp(current->word, newNodePtr->word) <= 0) {
+    while (current != NULL && strcmp(current->word, new_node->word) <= 0) {
         previous = current;
         current = current->next;
     }
 
     if (previous == NULL) {
-        newNodePtr->next = word_list->head;
-        word_list->head = newNodePtr;
+        new_node->next = word_list->head;
+        word_list->head = new_node;
     } else {
-        previous->next = newNodePtr;
-        newNodePtr->next = current;
+        previous->next = new_node;
+        new_node->next = current;
 
         if (current == NULL) {
-            word_list->tail = newNodePtr;
+            word_list->tail = new_node;
         }
     }
 
