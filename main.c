@@ -32,14 +32,26 @@ void validate_argc(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-} 
+}
+
+void validate_input_file(char **argv) {
+     FILE *file = fopen(argv[1], "r");
+
+     if (file == NULL) {
+         perror("Erreur lors de l'ouverture du fichier");
+         fprintf(stderr, "Erreur: %s\n", strerror(errno));
+         exit(EXIT_FAILURE);
+     }
+
+}
 
 void validate_argv(int argc, char **argv) {
     int option = getopt(argc, argv, "S:");
     if (option == 'S') {
         
     } else if (option == -1) {
-        // Pour quand pas option S
+        validate_input_file(argv);
+
     } else {
         afficher_manuel();
         exit(EXIT_FAILURE);
