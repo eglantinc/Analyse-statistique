@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <unistd.h>
 #include "listechainee.h"
 
 #define USAGE "NAME\n" \
@@ -33,8 +34,21 @@ void validate_argc(int argc, char **argv) {
 
 } 
 
+void validate_argv(int argc, char **argv) {
+    int option = getopt(argc, argv, "S:");
+    if (option == 'S') {
+        
+    } else if (option == -1) {
+        // Pour quand pas option S
+    } else {
+        afficher_manuel();
+        exit(EXIT_FAILURE);
+    }
+}
+
 int main (int argc, char **argv) {
     validate_argc(argc, argv);
+    validate_argv(argc, argv);
 
 return 0;
 }
