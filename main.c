@@ -46,18 +46,17 @@ void validate_input_file(char **argv) {
 }
 
 void validate_argv(int argc, char **argv) {
-    int option = getopt(argc, argv, "S:");
-    if (option == 'S') {
-        
-    } else if (option == -1) {
-        validate_input_file(argv);
-
-    } else {
-        afficher_manuel();
-        exit(EXIT_FAILURE);
-    }
+    validate_input_file(argv);
+    if (argc == 4) {
+        if (strcmp(argv[2], "-S") == 0) {
+            printf("ICI\n");
+        } else {
+            fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
+            afficher_manuel();
+            exit(EXIT_FAILURE);
+        }
+    } 
 }
-
 int main (int argc, char **argv) {
     validate_argc(argc, argv);
     validate_argv(argc, argv);
