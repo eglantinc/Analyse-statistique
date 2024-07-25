@@ -19,13 +19,6 @@ void initialize_list(LinkedList *word_list) {
     word_list->word_count = 0;
 }
 
-void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
-    if (word_list->word_count == 0) {
-        word_list->head = new_node;
-        word_list->tail = new_node;
-        word_list->word_count++;
-    }
-}
 
 void print_empty_list_message(LinkedList *word_list) {
     if (word_list->word_count == 0) {
@@ -90,15 +83,19 @@ struct Node* create_node(char *new_word) {
 }
 
 
-void insert_in_order(LinkedList *word_list, char *new_word) {
-    Node *new_node = create_node(new_word);
-
+void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
     if (word_list->word_count == 0) {
         word_list->head = new_node;
         word_list->tail = new_node;
         word_list->word_count++;
-        return;  
+        return;
     }
+}
+
+void insert_in_order(LinkedList *word_list, char *new_word) {
+    Node *new_node = create_node(new_word);
+
+    insert_into_empty_list(word_list, new_node);
 
     Node *current = word_list->head;
     Node *previous = NULL;
