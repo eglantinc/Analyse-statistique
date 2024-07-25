@@ -47,11 +47,17 @@ void validate_input_file(char **argv) {
      print_fopen_error(file);
 }
 
+void validate_output_file(char **argv) {
+    FILE *file = fopen(argv[3], "w");
+    print_fopen_error(file);
+
+}
+
 void validate_argv(int argc, char **argv) {
     validate_input_file(argv);
     if (argc == 4) {
         if (strcmp(argv[2], "-S") == 0) {
-
+            validate_output_file(argv);
         } else {
             fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
             afficher_manuel();
