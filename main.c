@@ -34,22 +34,24 @@ void validate_argc(int argc, char **argv) {
 
 }
 
-void validate_input_file(char **argv) {
-     FILE *file = fopen(argv[1], "r");
-
-     if (file == NULL) {
+void print_fopen_error(FILE *file) {
+    if (file == NULL) {
          perror("Erreur lors de l'ouverture du fichier");
          fprintf(stderr, "Erreur: %s\n", strerror(errno));
          exit(EXIT_FAILURE);
      }
+}
 
+void validate_input_file(char **argv) {
+     FILE *file = fopen(argv[1], "r");
+     print_fopen_error(file);
 }
 
 void validate_argv(int argc, char **argv) {
     validate_input_file(argv);
     if (argc == 4) {
         if (strcmp(argv[2], "-S") == 0) {
-            printf("ICI\n");
+
         } else {
             fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
             afficher_manuel();
