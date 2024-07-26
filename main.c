@@ -93,6 +93,7 @@ int main (int argc, char **argv) {
     fseek(input_file, 0, SEEK_SET);
     fprintf(output_file, "Nombre de mots sans dupplication: %d\n", word_list.word_count);
     fprintf(output_file, "Nombre de lignes dans le fichier: %d\n", count_lines(input_file));
+    fprintf(output_file, "Nombre de lettres distinctes dans la liste: %d\n", distinct_letter_count(&word_list));
     fclose(output_file);
     fclose(input_file);
     

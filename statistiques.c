@@ -27,4 +27,24 @@ int count_lines(FILE *file) {
     return number_of_lines;
 }
 
+int distinct_letter_count(LinkedList *lstPtr) {
+    bool seen[26] = {false};
+    int count = 0;
+
+    Node *current = lstPtr->head;
+
+    while (current != NULL) {
+        for (int i = 0; current->word[i]!= '\0'; i++) {
+            char c = current->word[i];
+            int index = c - 'A';
+            if (!seen[index]) {
+                seen[index] = true;
+                count++;
+            } 
+        }
+        current = current->next;   
+   }
+   return count;
+}
+
 
