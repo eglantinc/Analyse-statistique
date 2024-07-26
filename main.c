@@ -62,6 +62,14 @@ bool is_empty_line(const char *line) {
     return true;
 }
 
+void truncate_line(char *line) {
+    for (unsigned int i = 0; line[i] != '\0'; i++) {
+        if (isspace(line[i])) {
+            line[i] ='\0';
+        }
+    }
+ }
+
 FILE *validate_input_file(char **argv) {
     char line[MAX_CHAR + 1];
     FILE *file = fopen(argv[1], "r");
@@ -71,7 +79,7 @@ FILE *validate_input_file(char **argv) {
        for (int i = 0; line[i] != '\0'; i++) {
           validate_letters_in_word(line[i], file);
           if (!is_empty_line(line)) {
-             
+              truncate_line(line); 
           }
        }
     }
