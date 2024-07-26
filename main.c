@@ -64,16 +64,12 @@ bool is_empty_line(const char *line) {
 }
 
 void remove_space(char *line) {
-    int i = 0, j = 0;
-    while (line[i]) {
-        if (!isspace((line[i]))) {
-            line[j++] = line[i];
+    for (unsigned int i = 0; line[i] != '\0'; i++) {
+        if (isspace(line[i])) {
+            line[i] = '\0';
         }
-        i++;
     }
-    line[j] = '\0'; 
 }
-
 FILE *validate_input_file(char **argv) {
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);
@@ -106,17 +102,20 @@ void validate_argv(int argc, char **argv) {
 
 int main (int argc, char **argv) { 
     char line[MAX_CHAR + 1];
+    char line_copy[MAX_CHAR + 1];  
     validate_argc(argc, argv);
     validate_argv(argc, argv);
     FILE *file = validate_input_file(argv);
      while (fgets(line, sizeof(line),file)) {
-       for (int i = 0; line[i] != '\0'; i++) {
-          validate_letters_in_word(line[i], file); 
-          if (!is_empty_line(line)) {
-              remove_space(line);
-              remove_line_break(line);
-          }
+        strcpy(line_copy, line);  
+        char *word = strtok(line_copy, " \n"); 
+        while (word != NULL) {
+            for (int i = 0; word[i] != '\0'; i++) {
+                validate_letters_in_word(word[i], file); 
+            } 
+            word = strtok(NULL, " \n"); 
         }
-     }
+    }
+     
      return 0;
 }
