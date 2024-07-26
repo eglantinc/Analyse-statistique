@@ -108,6 +108,10 @@ int main (int argc, char **argv) {
     FILE *input_file = validate_input_file(argv);
     FILE *output_file = validate_output_file(argv);
     insert_word_from_file(input_file, &word_list);
+    fprintf(output_file, "Nombre de mots avec dupplication: %d\n", word_list.word_count);
+    delete_duplicate(&word_list);
+    fprintf(output_file, "Nombre de mots sans dupplication: %d\n", word_list.word_count);
+    fclose(output_file);
     print_list(&word_list);
 
      
