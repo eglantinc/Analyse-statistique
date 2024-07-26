@@ -45,9 +45,10 @@ void print_fopen_error(FILE *file) {
 }
 
 void validate_letters_in_word(char char_in_word, FILE *file) {
+
     if (!isalpha(char_in_word) || !isupper(char_in_word)) {
-               fprintf(stderr, "Erreur, tous les mots du fichiers doivent" 
-                       "être des lettres majuscules sans caractères accentués");
+        fprintf(stderr, "Erreur, tous les mots du fichiers doivent " 
+                "être des lettres majuscules sans caractères accentués\n");
         fclose(file);
         exit(EXIT_FAILURE);
     }
@@ -62,28 +63,33 @@ bool is_empty_line(const char *line) {
     return true;
 }
 
-void truncate_line(char *line) {
-    for (unsigned int i = 0; line[i] != '\0'; i++) {
-        if (isspace(line[i])) {
-            line[i] ='\0';
+void remove_space(char *line) {
+    int i = 0, j = 0;
+    while (line[i]) {
+        if (!isspace((line[i]))) {
+            line[j++] = line[i];
         }
+        i++;
     }
- }
+    line[j] = '\0'; 
+}
 
 FILE *validate_input_file(char **argv) {
     char line[MAX_CHAR + 1];
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);
-    
-     while (fgets(line, sizeof(line),file)) {
+
+    while (fgets(line, sizeof(line),file)) {
        for (int i = 0; line[i] != '\0'; i++) {
           validate_letters_in_word(line[i], file);
           if (!is_empty_line(line)) {
-              truncate_line(line); 
+              remove_space(line);
+            if (line[strlen(line) - 1] == '\n') {
+                  line[strlen(line) - 1] = '\0';
+              }
           }
-       }
-    }
-
+        }
+     }
 
     return file;
 }
@@ -95,7 +101,6 @@ void validate_output_file(char **argv) {
 }
 
 void validate_argv(int argc, char **argv) {
-    validate_input_file(argv);
     if (argc == 4) {
         if (strcmp(argv[2], "-S") == 0) {
             validate_output_file(argv);
@@ -107,11 +112,8 @@ void validate_argv(int argc, char **argv) {
     } 
 }
 
-
 int main (int argc, char **argv) { 
     validate_argc(argc, argv);
     validate_argv(argc, argv);
-  
-
-return 0;
+    return 0;
 }
