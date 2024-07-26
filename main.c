@@ -87,22 +87,29 @@ void validate_argv(int argc, char **argv) {
     } 
 }
 
-int main (int argc, char **argv) { 
+void insert_word_from_file(FILE *file, LinkedList *word_list) {
     char line[MAX_CHAR + 1];
-    char line_copy[MAX_CHAR + 1];  
-    validate_argc(argc, argv);
-    validate_argv(argc, argv);
-    FILE *file = validate_input_file(argv);
-     while (fgets(line, sizeof(line),file)) {
+    char line_copy[MAX_CHAR + 1];
+    while (fgets(line, sizeof(line),file)) {
         strcpy(line_copy, line);  
         char *word = strtok(line_copy, " \n"); 
         while (word != NULL) {
             for (int i = 0; word[i] != '\0'; i++) {
-                validate_letters_in_word(word[i], file); 
+                validate_letters_in_word(word[i], file);
             } 
+            insert_in_order(word_list, word);
             word = strtok(NULL, " \n"); 
         }
     }
+}
+
+int main (int argc, char **argv) { 
+    LinkedList word_list = {NULL};
+    validate_argc(argc, argv);
+    validate_argv(argc, argv);
+    FILE *file = validate_input_file(argv);
+    insert_word_from_file(file, &word_list);
+
      
      return 0;
 }
