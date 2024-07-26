@@ -75,22 +75,8 @@ void remove_space(char *line) {
 }
 
 FILE *validate_input_file(char **argv) {
-    char line[MAX_CHAR + 1];
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);
-
-    while (fgets(line, sizeof(line),file)) {
-       for (int i = 0; line[i] != '\0'; i++) {
-          validate_letters_in_word(line[i], file);
-          if (!is_empty_line(line)) {
-              remove_space(line);
-            if (line[strlen(line) - 1] == '\n') {
-                  line[strlen(line) - 1] = '\0';
-              }
-          }
-        }
-     }
-
     return file;
 }
 
@@ -113,7 +99,20 @@ void validate_argv(int argc, char **argv) {
 }
 
 int main (int argc, char **argv) { 
+    char line[MAX_CHAR + 1];
     validate_argc(argc, argv);
     validate_argv(argc, argv);
-    return 0;
+    FILE *file = validate_input_file(argv);
+     while (fgets(line, sizeof(line),file)) {
+       for (int i = 0; line[i] != '\0'; i++) {
+          validate_letters_in_word(line[i], file); 
+          if (!is_empty_line(line)) {
+              remove_space(line);
+              if (line[strlen(line) - 1] == '\n') {
+                  line[strlen(line) - 1] = '\0';
+              }
+          }
+        }
+     }
+     return 0;
 }
