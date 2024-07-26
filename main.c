@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "listechainee.h"
 #define USAGE "NAME\n" \
                "    %s - Trie une liste de mots provenant d’un fichier d’entrée.\n" \
@@ -51,17 +52,32 @@ void validate_letters_in_word(char char_in_word, FILE *file) {
         exit(EXIT_FAILURE);
     }
 }
-void validate_input_file(char **argv) {
+
+bool is_empty_line(const char *line) {
+    for (unsigned int i = 0; line[i] != '\0'; i++) {
+        if (!isspace(line[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+FILE *validate_input_file(char **argv) {
     char line[MAX_CHAR + 1];
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);
-
-    while (fgets(line, sizeof(line),file)) {
+    
+     while (fgets(line, sizeof(line),file)) {
        for (int i = 0; line[i] != '\0'; i++) {
           validate_letters_in_word(line[i], file);
-       } 
+          if (!is_empty_line(line)) {
+             
+          }
+       }
     }
 
+
+    return file;
 }
 
 void validate_output_file(char **argv) {
@@ -84,9 +100,10 @@ void validate_argv(int argc, char **argv) {
 }
 
 
-int main (int argc, char **argv) {
+int main (int argc, char **argv) { 
     validate_argc(argc, argv);
     validate_argv(argc, argv);
+  
 
 return 0;
 }
