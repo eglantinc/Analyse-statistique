@@ -5,7 +5,6 @@
 #include <errno.h>
 #include <unistd.h>
 #include "listechainee.h"
-
 #define USAGE "NAME\n" \
                "    %s - Trie une liste de mots provenant d’un fichier d’entrée.\n" \
                "    Une fois les mots triés, le programme affichera la liste ordonnée\n" \
@@ -20,6 +19,8 @@
                "    -S sortie.txt\n" \
                "        (Optionnel) Génère des statistiques et les enregistre\n" \
                "        dans le fichier de sortie spécifié.\n"
+
+#define MAX_CHAR 80
 
 void afficher_manuel(void) {
     fprintf(stderr, USAGE, "tri", "tri");
@@ -42,9 +43,25 @@ void print_fopen_error(FILE *file) {
      }
 }
 
+void validate_letters_in_word(char char_in_word, FILE *file) {
+    if (!isalpha(char_in_word) || !isupper(char_in_word)) {
+               fprintf(stderr, "Erreur, tous les mots du fichiers doivent" 
+                       "être des lettres majuscules sans caractères accentués");
+        fclose(file);
+        exit(EXIT_FAILURE);
+    }
+}
 void validate_input_file(char **argv) {
-     FILE *file = fopen(argv[1], "r");
-     print_fopen_error(file);
+    char line[MAX_CHAR + 1];
+    FILE *file = fopen(argv[1], "r");
+    print_fopen_error(file);
+
+    while (fgets(line, sizeof(line),file)) {
+       for (int i = 0; line[i] != '\0'; i++) {
+          validate_letters_in_word(line[i], file);
+       } 
+    }
+
 }
 
 void validate_output_file(char **argv) {
@@ -65,6 +82,8 @@ void validate_argv(int argc, char **argv) {
         }
     } 
 }
+
+
 int main (int argc, char **argv) {
     validate_argc(argc, argv);
     validate_argv(argc, argv);
