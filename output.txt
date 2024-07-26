@@ -1,2 +1,3 @@
-Nombre de mots avec dupplication: 121
-Nombre de mots sans dupplication: 6
+Nombre de mots avec dupplication: 120
+Nombre de mots sans dupplication: 5
+Nombre de lignes dans le fichier: 24

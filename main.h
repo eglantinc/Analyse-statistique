@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #define MAX_CHAR 80
 #include "listechainee.h"
+#include "statistiques.h"
 
 
 #define USAGE "NAME\n" \
@@ -68,15 +69,6 @@ void print_fopen_error(FILE *file);
  * @param file Le fichier
  */
 void validate_letters_in_word(char char_in_word, FILE *file);
-
-
-/**
- * Verifie qu'une ligne est vide
- * 
- * @param line La ligne à vérifier
- */
-bool is_empty_line(const char *line);
-
 
 /**
  * Valider que le fichier d'entrée est ouvert

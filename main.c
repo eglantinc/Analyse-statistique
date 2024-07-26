@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "main.h"
 #include "listechainee.h"
+#include "statistiques.h"
 
 void print_usage(void) {
     fprintf(stderr, USAGE, "tri", "tri");
@@ -37,15 +38,6 @@ void validate_letters_in_word(char char_in_word, FILE *file) {
         fclose(file);
         exit(EXIT_FAILURE);
     }
-}
-
-bool is_empty_line(const char *line) {
-    for (unsigned int i = 0; line[i] != '\0'; i++) {
-        if (!isspace(line[i])) {
-            return false;
-        }
-    }
-    return true;
 }
 
 FILE *validate_input_file(char **argv) {
@@ -88,17 +80,23 @@ void insert_word_from_file(FILE *file, LinkedList *word_list) {
 
 int main (int argc, char **argv) { 
     LinkedList word_list = {NULL};
+    
     validate_argc(argc, argv);
     validate_argv(argc, argv);
+    
     FILE *input_file = validate_input_file(argv);
     FILE *output_file = validate_output_file(argv);
+    
     insert_word_from_file(input_file, &word_list);
     fprintf(output_file, "Nombre de mots avec dupplication: %d\n", word_list.word_count);
     delete_duplicate(&word_list);
+    fseek(input_file, 0, SEEK_SET);
     fprintf(output_file, "Nombre de mots sans dupplication: %d\n", word_list.word_count);
+    fprintf(output_file, "Nombre de lignes dans le fichier: %d\n", count_lines(input_file));
     fclose(output_file);
+    fclose(input_file);
+    
     print_list(&word_list);
-
      
     return 0;
 }
