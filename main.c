@@ -5,32 +5,17 @@
 #include <errno.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include "main.h"
 #include "listechainee.h"
-#define USAGE "NAME\n" \
-               "    %s - Trie une liste de mots provenant d’un fichier d’entrée.\n" \
-               "    Une fois les mots triés, le programme affichera la liste ordonnée\n" \
-               "    sans doublons sur stdout.\n" \
-               "\n" \
-               "SYNOPSIS\n" \
-               "    ./%s entree.txt [-S sortie.txt]\n" \
-               "\n" \
-               "DESCRIPTION\n" \
-               "    entree.txt\n" \
-               "        Fichier contenant la liste des mots à trier.\n" \
-               "    -S sortie.txt\n" \
-               "        (Optionnel) Génère des statistiques et les enregistre\n" \
-               "        dans le fichier de sortie spécifié.\n"
 
-#define MAX_CHAR 80
-
-void afficher_manuel(void) {
+void print_usage(void) {
     fprintf(stderr, USAGE, "tri", "tri");
 }
 
 void validate_argc(int argc, char **argv) {
     if (argc != 2 && argc != 4) {
         fprintf(stderr, "Ce programme prends soit 2 arguments, soit 4 arguments.\n");
-        afficher_manuel();
+        print_usage();
         exit(EXIT_FAILURE);
     }
 
@@ -79,7 +64,7 @@ void validate_argv(int argc, char **argv) {
     if (argc == 4) {
         if (strcmp(argv[2], "-S") != 0) {
             fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
-            afficher_manuel();
+            print_usage();
             exit(EXIT_FAILURE);
         }
     } 
