@@ -86,6 +86,12 @@ void validate_output_file(char **argv) {
 
 }
 
+void remove_line_break(char *line) {
+    if (line[strlen(line) - 1] == '\n') {
+        line[strlen(line) - 1] = '\0';
+    }
+}
+
 void validate_argv(int argc, char **argv) {
     if (argc == 4) {
         if (strcmp(argv[2], "-S") == 0) {
@@ -108,9 +114,7 @@ int main (int argc, char **argv) {
           validate_letters_in_word(line[i], file); 
           if (!is_empty_line(line)) {
               remove_space(line);
-              if (line[strlen(line) - 1] == '\n') {
-                  line[strlen(line) - 1] = '\0';
-              }
+              remove_line_break(line);
           }
         }
      }
