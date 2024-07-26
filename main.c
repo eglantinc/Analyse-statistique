@@ -69,17 +69,15 @@ FILE *validate_input_file(char **argv) {
     return file;
 }
 
-void validate_output_file(char **argv) {
+FILE *validate_output_file(char **argv) {
     FILE *file = fopen(argv[3], "w");
     print_fopen_error(file);
-
+    return file;
 }
 
 void validate_argv(int argc, char **argv) {
     if (argc == 4) {
-        if (strcmp(argv[2], "-S") == 0) {
-            validate_output_file(argv);
-        } else {
+        if (strcmp(argv[2], "-S") != 0) {
             fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
             afficher_manuel();
             exit(EXIT_FAILURE);
@@ -107,9 +105,11 @@ int main (int argc, char **argv) {
     LinkedList word_list = {NULL};
     validate_argc(argc, argv);
     validate_argv(argc, argv);
-    FILE *file = validate_input_file(argv);
-    insert_word_from_file(file, &word_list);
+    FILE *input_file = validate_input_file(argv);
+    FILE *output_file = validate_output_file(argv);
+    insert_word_from_file(input_file, &word_list);
+    print_list(&word_list);
 
      
-     return 0;
+    return 0;
 }

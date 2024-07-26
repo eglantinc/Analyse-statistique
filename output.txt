@@ -1,0 +1,2 @@
+Nombre de mots avec dupplication: 120
+Nombre de mots sans dupplication: 5

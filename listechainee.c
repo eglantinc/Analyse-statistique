@@ -85,7 +85,7 @@ struct Node* create_node(const char *new_word) {
 
 
 void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
-    if (word_list->word_count == 0) {
+    if (word_list->word_count == 0 ) {
         word_list->head = new_node;
         word_list->tail = new_node;
         word_list->word_count++;
@@ -97,7 +97,7 @@ void insert_in_order(LinkedList *word_list, const char *new_word) {
     Node *new_node = create_node(new_word);
 
     insert_into_empty_list(word_list, new_node);
-
+    
     Node *current = word_list->head;
     Node *previous = NULL;
 
