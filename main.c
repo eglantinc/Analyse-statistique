@@ -63,13 +63,6 @@ bool is_empty_line(const char *line) {
     return true;
 }
 
-void remove_space(char *line) {
-    for (unsigned int i = 0; line[i] != '\0'; i++) {
-        if (isspace(line[i])) {
-            line[i] = '\0';
-        }
-    }
-}
 FILE *validate_input_file(char **argv) {
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);
@@ -80,12 +73,6 @@ void validate_output_file(char **argv) {
     FILE *file = fopen(argv[3], "w");
     print_fopen_error(file);
 
-}
-
-void remove_line_break(char *line) {
-    if (line[strlen(line) - 1] == '\n') {
-        line[strlen(line) - 1] = '\0';
-    }
 }
 
 void validate_argv(int argc, char **argv) {
