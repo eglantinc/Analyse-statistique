@@ -44,31 +44,33 @@ int distinct_letter_count(LinkedList *lstPtr) {
    return count;
 }
 
+
 char find_most_repeated_letter(LinkedList *lstPtr) {
     Node *current = lstPtr->head;
     int current_letter_count = 0;
     int max_letter_count = 0;
     char max_letter = current->word[0];
-    char *currentLetter;
+    char *current_letter;
 
     while (current != NULL) {
-        currentLetter = current->word;
-        while (*currentLetter != '\0') {
+        current_letter = current->word;
+        while (*current_letter != '\0') {
             for (int i = 0; current->word[i] != '\0'; i++) {
-                if (current->word[i] == *currentLetter) {
+                if (current->word[i] == *current_letter) {
                     current_letter_count++;
                 }
             }
-            if (current_letter_count > max_letter_count) {
+            if (current_letter_count >= max_letter_count) {
                 max_letter_count = current_letter_count;
-                max_letter = *currentLetter;
+                max_letter = *current_letter;
             }
             current_letter_count = 0;
-            currentLetter++;
+            current_letter++;
         }
         current = current->next;
+        
     }
+
     return max_letter;
 }
-
 
