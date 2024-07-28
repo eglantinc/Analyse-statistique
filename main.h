@@ -47,10 +47,9 @@ void print_usage(void);
  * Valide le nombre d'arguments en entree
  * et envoie un message d'erreur en cas d'erreur.
  * 
- * @param argc Le nombre d'arguments.
  * @param argv Les arguments de la ligne de commande.
  */
-void validate_argc(int argc, char **argv);
+void validate_argc(int argc);
 
 
 /**
