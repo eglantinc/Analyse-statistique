@@ -25,36 +25,37 @@ int count_lines(FILE *file) {
     return number_of_lines;
 }
 
-int distinct_letter_count(LinkedList *lstPtr) {
-    bool seen[26] = {false};
-    int count = 0;
+int distinct_letter_count(LinkedList *word_list) {
+    bool is_seen[26] = {false};
+    int letter_count = 0;
 
-    Node *current = lstPtr->head;
+    Node *current = word_list->head;
 
     while (current != NULL) {
         for (int i = 0; current->word[i]!= '\0'; i++) {
-            char c = current->word[i];
-            int index = c - 'A';
-            if (!seen[index]) {
-                seen[index] = true;
-                count++;
+            char letter = current->word[i];
+            // Trouver l'indice de la lettre qu'on cherche
+            int letter_index = letter - 'A';
+            if (!is_seen[letter_index]) {
+                is_seen[letter_index] = true;
+                letter_count++;
             } 
         }
         current = current->next;   
    }
-   return count;
+   return letter_count;
 }
 
 
-char find_most_repeated_letter(LinkedList *lstPtr) {
+char find_most_repeated_letter(LinkedList *word_list) {
     int max_letter = 0;   
     char max = '\0';      
 
-    if (lstPtr->word_count == 0) {  
+    if (word_list->word_count == 0) {  
         return max;
     }
     
-    Node *current = lstPtr->head;  
+    Node *current = word_list->head;  
     int count[26] = {0};           
 
     while (current != NULL) {      
