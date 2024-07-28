@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "statistiques.h"
 #include "main.h"
@@ -46,31 +47,30 @@ int distinct_letter_count(LinkedList *lstPtr) {
 
 
 char find_most_repeated_letter(LinkedList *lstPtr) {
-    Node *current = lstPtr->head;
-    int current_letter_count = 0;
-    int max_letter_count = 0;
-    char max_letter = current->word[0];
-    char *current_letter;
+    int max_letter = 0;   
+    char max = '\0';      
 
-    while (current != NULL) {
-        current_letter = current->word;
-        while (*current_letter != '\0') {
-            for (int i = 0; current->word[i] != '\0'; i++) {
-                if (current->word[i] == *current_letter) {
-                    current_letter_count++;
-                }
-            }
-            if (current_letter_count >= max_letter_count) {
-                max_letter_count = current_letter_count;
-                max_letter = *current_letter;
-            }
-            current_letter_count = 0;
-            current_letter++;
-        }
-        current = current->next;
-        
+    if (lstPtr->word_count == 0) {  
+        return max;
     }
+    
+    Node *current = lstPtr->head;  
+    int count[26] = {0};           
 
-    return max_letter;
+    while (current != NULL) {      
+        for (int i = 0; current->word[i] != '\0'; i++) {  
+            char c = current->word[i];
+            int index = c - 'A'; 
+            count[index]++;  
+
+            if (count[index] > max_letter) { 
+                max_letter = count[index];
+                max = c;
+            }
+        }
+        current = current->next; 
+    }
+    return max; 
 }
+
 

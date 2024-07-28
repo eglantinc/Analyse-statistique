@@ -24,7 +24,7 @@ void validate_argc(int argc, char **argv) {
 
 void print_fopen_error(FILE *file) {
     if (file == NULL) {
-         perror("Erreur lors de l'ouverture du fichier");
+         perror("Erreur lors de l'ouverture du fichier.\n");
          fprintf(stderr, "Erreur: %s\n", strerror(errno));
          exit(EXIT_FAILURE);
      }

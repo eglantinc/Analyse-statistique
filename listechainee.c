@@ -12,7 +12,7 @@ void initialize_list(LinkedList *word_list) {
 
 void print_empty_list_message(const LinkedList *word_list) {
     if (word_list->word_count == 0) {
-        printf("La liste de mot est vide");
+        printf("La liste de mots est vide\n");
         return;
     }
 }
@@ -85,9 +85,9 @@ struct Node* create_node(const char *new_word) {
 
 
 void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
-        word_list->head = new_node;
-        word_list->tail = new_node;
-        word_list->word_count++;
+    word_list->head = new_node;
+    word_list->tail = new_node;
+    word_list->word_count++;
 }
 
 void insert_in_order(LinkedList *word_list, const char *new_word) {
