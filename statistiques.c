@@ -48,30 +48,30 @@ int distinct_letter_count(LinkedList *word_list) {
 
 
 char find_most_repeated_letter(LinkedList *word_list) {
-    int max_letter = 0;   
-    char max = '\0';      
+    int max_letter_occurence = 0;   
+    char most_repeated_letter = '\0';      
 
     if (word_list->word_count == 0) {  
-        return max;
+        return most_repeated_letter;
     }
     
     Node *current = word_list->head;  
-    int count[26] = {0};           
+    int count_occurence[26] = {0};           
 
     while (current != NULL) {      
         for (int i = 0; current->word[i] != '\0'; i++) {  
-            char c = current->word[i];
-            int index = c - 'A'; 
-            count[index]++;  
+            char letter = current->word[i];
+            int letter_index = letter - 'A'; 
+            count_occurence[letter_index]++;  
 
-            if (count[index] > max_letter) { 
-                max_letter = count[index];
-                max = c;
+            if (count_occurence[letter_index] > max_letter_occurence) { 
+                max_letter_occurence = count_occurence[letter_index];
+                most_repeated_letter = letter;
             }
         }
         current = current->next; 
     }
-    return max; 
+    return most_repeated_letter; 
 }
 
 
