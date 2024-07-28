@@ -1,5 +1,19 @@
 #ifndef STATISTIQUES_H
 #define STATISTIQUES_H
+/*
+ * Module pour: statistiques.c
+ *
+ * Description: Definie un module de statistiques servant 
+ * à calculer le nombre de lignes dans le fichier d'entrée 
+ * (sans considérer les lignes vides), calculer le 
+ * nombre de lettres dans la liste de mots (sans considérer les doublons)
+ * et à trouver la lettre la plus fréquente (sans considérer les doublons)
+ *
+ *
+ * Auteure: Églantine Clervil
+ * Date: 11 aout 2024
+ */
+
 #include "listechainee.h"
 #include <stdio.h>
 
