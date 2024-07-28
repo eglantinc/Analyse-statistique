@@ -13,7 +13,7 @@ void print_usage(void) {
     fprintf(stderr, USAGE, "tri", "tri");
 }
 
-void validate_argc(int argc, char **argv) {
+void validate_argc(int argc) {
     if (argc != 2 && argc != 4) {
         fprintf(stderr, "Ce programme prends soit 2 arguments, soit 4 arguments.\n");
         print_usage();
@@ -79,9 +79,9 @@ void insert_word_from_file(FILE *file, LinkedList *word_list) {
 }
 
 int main (int argc, char **argv) { 
-    LinkedList word_list = {NULL};
+    LinkedList word_list = {NULL, NULL, 0};
     
-    validate_argc(argc, argv);
+    validate_argc(argc);
     validate_argv(argc, argv);
     
     FILE *input_file = validate_input_file(argv);
