@@ -30,13 +30,12 @@ void print_fopen_error(FILE *file) {
      }
 }
 
-void validate_letters_in_word(char char_in_word, FILE *file) {
+void validate_letters_in_word(char char_in_word) {
 
     if (!isalpha(char_in_word) || !isupper(char_in_word)) {
         fprintf(stderr, "Erreur, tous les mots du fichiers doivent " 
                 "être des lettres majuscules sans caractères accentués\n");
-        fclose(file);
-        exit(EXIT_FAILURE);
+          exit(EXIT_FAILURE);
     }
 }
 
@@ -70,7 +69,7 @@ void insert_word_from_file(FILE *file, LinkedList *word_list) {
         char *word = strtok(line_copy, " \n"); 
         while (word != NULL) {
             for (int i = 0; word[i] != '\0'; i++) {
-                validate_letters_in_word(word[i], file);
+                validate_letters_in_word(word[i]);
             } 
             insert_in_order(word_list, word);
             word = strtok(NULL, " \n"); 
