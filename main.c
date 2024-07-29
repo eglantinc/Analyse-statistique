@@ -30,15 +30,6 @@ void print_fopen_error(FILE *file) {
      }
 }
 
-void validate_letters_in_word(char char_in_word) {
-
-    if (!isalpha(char_in_word) || !isupper(char_in_word)) {
-        fprintf(stderr, "Erreur, tous les mots du fichiers doivent " 
-                "être des lettres majuscules sans caractères accentués\n");
-          exit(EXIT_FAILURE);
-    }
-}
-
 FILE *validate_input_file(char **argv) {
     FILE *file = fopen(argv[1], "r");
     print_fopen_error(file);

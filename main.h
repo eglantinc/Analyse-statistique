@@ -61,12 +61,6 @@ void validate_argc(int argc);
 void print_fopen_error(FILE *file);
 
 
-/**
- * Ajoute un noeud dans une liste vide
- *
- * @param word_list La liste de mots
- */
-void validate_letters_in_word(char char_in_word);
 
 /**
  * Valider que le fichier d'entrée est ouvert

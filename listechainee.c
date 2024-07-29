@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "listechainee.h"
 #include "main.h"
 
@@ -17,6 +18,16 @@ void print_empty_list_message(const LinkedList *word_list) {
         return;
     }
 }
+
+void validate_letters_in_word(char char_in_word) {
+
+    if (!isalpha(char_in_word) || !isupper(char_in_word)) {
+        fprintf(stderr, "Erreur, tous les mots du fichiers doivent "
+                "être des lettres majuscules sans caractères accentués\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 
 void delete_duplicate(LinkedList *word_list) {
     print_empty_list_message(word_list);

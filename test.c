@@ -140,6 +140,9 @@ void test_find_most_repeated_letter(void) {
     LinkedList mock_list;
     initialize_list(&mock_list);
 
+    CU_ASSERT_EQUAL('\0', find_most_repeated_letter(&mock_list));
+
+
     const char *word1 = "AVION";
     const char *word2 = "CHAT";
     const char *word3 = "GLACE";
@@ -171,8 +174,40 @@ void test_is_empty_line(void) {
     CU_ASSERT(!is_empty_line(test_line3));
 }
 
+void test_insert_word_from_file(void) {
+    const char *file_name = "test.txt";
+    FILE *file = fopen(file_name, "r");
+    CU_ASSERT_PTR_NOT_NULL(file);
 
-int main() {
+    LinkedList mock_list;
+    initialize_list(&mock_list);
+    insert_word_from_file(file, &mock_list);
+
+    CU_ASSERT(mock_list.word_count == 120);
+    CU_ASSERT_STRING_EQUAL("AMERTUME", mock_list.head->word);
+    CU_ASSERT_STRING_EQUAL("UNIVERS", mock_list.tail->word);
+    CU_ASSERT_STRING_EQUAL("AMERTUME", mock_list.head->next->word);
+
+    delete_duplicate(&mock_list);
+
+    CU_ASSERT(mock_list.word_count == 5);
+    free_word_list(&mock_list);
+}
+
+void test_count_lines(void) {
+    const char *file_name = "test.txt";
+    FILE *file = fopen(file_name, "r");
+    CU_ASSERT_PTR_NOT_NULL(file);
+
+
+    CU_ASSERT_EQUAL(24, count_lines(file));
+
+
+}
+
+
+
+int main(void) {
     CU_initialize_registry();
 
     CU_pSuite suite = CU_add_suite("LinkedList Suite", 0, 0);
@@ -182,11 +217,13 @@ int main() {
     CU_add_test(suite, "test of insert_in_order", test_insert_in_order);
     CU_add_test(suite, "test of delete_duplicate", test_delete_duplicate);
     CU_add_test(suite, "test of free_word_list", test_free_list);
+    CU_add_test(suite, "test of insert_word_from_file", test_insert_word_from_file);
     
     CU_pSuite suite_stats = CU_add_suite("Statistics Suite", 0, 0);
     CU_add_test(suite_stats, "test of distinct_letter_count", test_distinct_letter_count);
     CU_add_test(suite_stats, "test of find_most_repeated_letter", test_find_most_repeated_letter);
     CU_add_test(suite_stats, "test of is_empty_line", test_is_empty_line);
+    CU_add_test(suite_stats, "test of count_lines", test_count_lines);
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
