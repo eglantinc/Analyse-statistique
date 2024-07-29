@@ -57,7 +57,7 @@ void test_insert_in_order(void) {
     CU_ASSERT_STRING_EQUAL(word4, mock_list.head->next->next->word);
     CU_ASSERT_STRING_EQUAL(word1, mock_list.head->next->word);
     CU_ASSERT_STRING_EQUAL(word5, mock_list.head->next->next->next->word);
-    free_word_list(mock_list.head);
+    free_word_list(&mock_list);
 }
 
 void test_free_list(void) {
@@ -74,7 +74,7 @@ void test_free_list(void) {
     insert_in_order(&mock_list, word3);
 
     CU_ASSERT_EQUAL(3, mock_list.word_count);
-    free_word_list(mock_list.head);
+    free_word_list(&mock_list);
     CU_ASSERT_EQUAL(0, mock_list.word_count);
     CU_ASSERT_PTR_EQUAL(mock_list.head, NULL);
     CU_ASSERT_PTR_EQUAL(mock_list.tail, NULL);
@@ -111,7 +111,7 @@ void test_delete_duplicate(void) {
     CU_ASSERT(mock_list.word_count == 5);
     CU_ASSERT_STRING_EQUAL(word1, mock_list.head->next->word);
 
-    free_word_list(mock_list.head);
+    free_word_list(&mock_list);
 
 
 }

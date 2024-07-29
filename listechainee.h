@@ -44,7 +44,7 @@ void print_empty_list_message(const LinkedList *word_list);
  *
  * @params *head Un pointeur sur la tete de la liste
  */
-void free_word_list(Node *head);
+void free_word_list(LinkedList *word_list);
 
 /**
  * Supprime les mots en double et ne garde qu'un seul 

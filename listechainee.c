@@ -39,8 +39,8 @@ void delete_duplicate(LinkedList *word_list) {
     }
 }
 
-void free_word_list(Node *head) {
-    Node *current = head;
+void free_word_list(LinkedList *word_list) {
+    Node *current = word_list->head;
     Node *next;
 
     while (current != NULL) {
@@ -48,7 +48,10 @@ void free_word_list(Node *head) {
         free(current->word); 
         free(current);
         current = next;
+        word_list->word_count--;
     }
+    word_list->head = NULL;
+    word_list->tail = NULL;
 }
 
 void print_list(const LinkedList *word_list) {

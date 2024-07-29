@@ -8,11 +8,11 @@
         -:    3:#include <stdio.h>
         -:    4:#include "listechainee.h"
         -:    5:
-        4:    6:void initialize_list(LinkedList *word_list) {
-        4:    7:    word_list->head = NULL;
-        4:    8:    word_list->tail = NULL;
-        4:    9:    word_list->word_count = 0;
-        4:   10:}
+        5:    6:void initialize_list(LinkedList *word_list) {
+        5:    7:    word_list->head = NULL;
+        5:    8:    word_list->tail = NULL;
+        5:    9:    word_list->word_count = 0;
+        5:   10:}
         -:   11:
         -:   12:
         1:   13:void print_empty_list_message(const LinkedList *word_list) {
@@ -44,85 +44,88 @@
         -:   39:    }
         1:   40:}
         -:   41:
-        2:   42:void free_word_list(Node *head) {
-        2:   43:    Node *current = head;
+        3:   42:void free_word_list(LinkedList *word_list) {
+        3:   43:    Node *current = word_list->head;
         -:   44:    Node *next;
         -:   45:
-       12:   46:    while (current != NULL) {
-       10:   47:        next = current->next;
-       10:   48:        free(current->word); 
-       10:   49:        free(current);
-       10:   50:        current = next;
-        -:   51:    }
-        2:   52:}
-        -:   53:
-    #####:   54:void print_list(const LinkedList *word_list) {
-    #####:   55:    print_empty_list_message(word_list);
-    #####:   56:    Node *current = word_list->head;;
-        -:   57:
-    #####:   58:    while (current != NULL) {
-    #####:   59:        printf("%s\n", current->word);
-    #####:   60:        current = current->next;
-        -:   61:    }
-    #####:   62:}
-        -:   63:
-       13:   64:struct Node* create_node(const char *new_word) {
-       13:   65:    struct Node* new_node = (struct Node*)malloc(sizeof(Node));
-        -:   66:    
-       13:   67:    if (new_node == NULL) {
-    #####:   68:        perror("Erreur d'allocation de mémoire pour le nœud");
-    #####:   69:        exit(EXIT_FAILURE);
-        -:   70:    }
-        -:   71:
-       13:   72:    new_node->word = (char*)malloc(strlen(new_word) + 1);
-        -:   73:    
-       13:   74:    if (new_node->word == NULL) {
-    #####:   75:        perror("Erreur d'allocation de mémoire pour le mot");
-    #####:   76:        free(new_node);
-    #####:   77:        exit(EXIT_FAILURE);
-        -:   78:    }
-        -:   79:
-       13:   80:    strcpy(new_node->word, new_word);
-       13:   81:    new_node->next = NULL;
+       16:   46:    while (current != NULL) {
+       13:   47:        next = current->next;
+       13:   48:        free(current->word); 
+       13:   49:        free(current);
+       13:   50:        current = next;
+       13:   51:        word_list->word_count--;
+        -:   52:    }
+        3:   53:    word_list->head = NULL;
+        3:   54:    word_list->tail = NULL;
+        3:   55:}
+        -:   56:
+    #####:   57:void print_list(const LinkedList *word_list) {
+    #####:   58:    print_empty_list_message(word_list);
+    #####:   59:    Node *current = word_list->head;;
+        -:   60:
+    #####:   61:    while (current != NULL) {
+    #####:   62:        printf("%s\n", current->word);
+    #####:   63:        current = current->next;
+        -:   64:    }
+    #####:   65:}
+        -:   66:
+       16:   67:struct Node* create_node(const char *new_word) {
+       16:   68:    struct Node* new_node = (struct Node*)malloc(sizeof(Node));
+        -:   69:    
+       16:   70:    if (new_node == NULL) {
+    #####:   71:        perror("Erreur d'allocation de mémoire pour le nœud");
+    #####:   72:        exit(EXIT_FAILURE);
+        -:   73:    }
+        -:   74:
+       16:   75:    new_node->word = (char*)malloc(strlen(new_word) + 1);
+        -:   76:    
+       16:   77:    if (new_node->word == NULL) {
+    #####:   78:        perror("Erreur d'allocation de mémoire pour le mot");
+    #####:   79:        free(new_node);
+    #####:   80:        exit(EXIT_FAILURE);
+        -:   81:    }
         -:   82:
-       13:   83:    return new_node;
-        -:   84:}
+       16:   83:    strcpy(new_node->word, new_word);
+       16:   84:    new_node->next = NULL;
         -:   85:
-        -:   86:
-        3:   87:void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
-        3:   88:    word_list->head = new_node;
-        3:   89:    word_list->tail = new_node;
-        3:   90:    word_list->word_count++;
-        3:   91:}
-        -:   92:
-       12:   93:void insert_in_order(LinkedList *word_list, const char *new_word) {
-       12:   94:    Node *new_node = create_node(new_word);
+       16:   86:    return new_node;
+        -:   87:}
+        -:   88:
+        -:   89:
+        4:   90:void insert_into_empty_list(LinkedList *word_list, Node *new_node) {
+        4:   91:    word_list->head = new_node;
+        4:   92:    word_list->tail = new_node;
+        4:   93:    word_list->word_count++;
+        4:   94:}
         -:   95:
-       12:   96:    if (word_list->word_count == 0) {
-        2:   97:        insert_into_empty_list(word_list, new_node);
-        2:   98:        return;
-        -:   99:    }
-       10:  100:    Node *current = word_list->head;
-       10:  101:    Node *previous = NULL;
-        -:  102:
-       27:  103:    while (current != NULL && strcmp(current->word, new_node->word) <= 0) {
-       17:  104:        previous = current;
-       17:  105:        current = current->next;
-        -:  106:    }
-        -:  107:
-       10:  108:    if (previous == NULL) {
-        2:  109:        new_node->next = word_list->head;
-        2:  110:        word_list->head = new_node;
-        2:  111:    } else {
-        8:  112:        previous->next = new_node;
-        8:  113:        new_node->next = current;
-        -:  114:
-        8:  115:        if (current == NULL) {
-        2:  116:            word_list->tail = new_node;
-        2:  117:        }
-        -:  118:    }
-        -:  119:
-       10:  120:    word_list->word_count++;
-       12:  121:}
+       15:   96:void insert_in_order(LinkedList *word_list, const char *new_word) {
+       15:   97:    Node *new_node = create_node(new_word);
+        -:   98:
+       15:   99:    if (word_list->word_count == 0) {
+        3:  100:        insert_into_empty_list(word_list, new_node);
+        3:  101:        return;
+        -:  102:    }
+       12:  103:    Node *current = word_list->head;
+       12:  104:    Node *previous = NULL;
+        -:  105:
+       30:  106:    while (current != NULL && strcmp(current->word, new_node->word) <= 0) {
+       18:  107:        previous = current;
+       18:  108:        current = current->next;
+        -:  109:    }
+        -:  110:
+       12:  111:    if (previous == NULL) {
+        3:  112:        new_node->next = word_list->head;
+        3:  113:        word_list->head = new_node;
+        3:  114:    } else {
+        9:  115:        previous->next = new_node;
+        9:  116:        new_node->next = current;
+        -:  117:
+        9:  118:        if (current == NULL) {
+        3:  119:            word_list->tail = new_node;
+        3:  120:        }
+        -:  121:    }
         -:  122:
-        -:  123:
+       12:  123:    word_list->word_count++;
+       15:  124:}
+        -:  125:
+        -:  126:
