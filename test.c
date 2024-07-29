@@ -139,6 +139,27 @@ void test_distinct_letter_count(void) {
 
 }
 
+void test_find_most_repeated_letter(void) {
+    LinkedList mock_list;
+    initialize_list(&mock_list);
+
+    CU_ASSERT(mock_list.word_count == 0);
+    const char *word1 = "AVION";
+    const char *word2 = "CHAT";
+    const char *word3 = "GLACE";
+    const char *word4 = "LUNE";
+    const char *word5 = "MAISON";
+
+    insert_in_order(&mock_list, word1);
+    insert_in_order(&mock_list, word2);
+    insert_in_order(&mock_list, word3);
+    insert_in_order(&mock_list, word4);
+    insert_in_order(&mock_list, word5);
+
+    CU_ASSERT_EQUAL('A', find_most_repeated_letter(&mock_list));
+
+
+}
 
 
 
@@ -155,6 +176,7 @@ int main() {
     
     CU_pSuite suite_stats = CU_add_suite("Statistics Suite", 0, 0);
     CU_add_test(suite_stats, "test of distinct_letter_count", test_distinct_letter_count);
+    CU_add_test(suite_stats, "test of find most repeated letter", test_find_most_repeated_letter);
 
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
