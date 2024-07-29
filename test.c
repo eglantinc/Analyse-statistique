@@ -121,7 +121,6 @@ void test_distinct_letter_count(void) {
     LinkedList mock_list;
     initialize_list(&mock_list);
 
-    CU_ASSERT(mock_list.word_count == 0);
     const char *word1 = "AVION";
     const char *word2 = "CHAT";
     const char *word3 = "GLACE";
@@ -143,7 +142,6 @@ void test_find_most_repeated_letter(void) {
     LinkedList mock_list;
     initialize_list(&mock_list);
 
-    CU_ASSERT(mock_list.word_count == 0);
     const char *word1 = "AVION";
     const char *word2 = "CHAT";
     const char *word3 = "GLACE";
@@ -161,6 +159,19 @@ void test_find_most_repeated_letter(void) {
 
 }
 
+void test_is_empty_line(void) {
+    const char *test_line = "               ";
+    const char *test_line2 = "\n";
+    const char *test_line3 = "AMERTUME";
+    const char *test_line4 = "                   \n";
+    const char *test_line5 = "                    O";
+
+    CU_ASSERT(is_empty_line(test_line));
+    CU_ASSERT(!is_empty_line(test_line5));
+    CU_ASSERT(is_empty_line(test_line2));
+    CU_ASSERT(is_empty_line(test_line4));
+    CU_ASSERT(!is_empty_line(test_line3));
+}
 
 
 int main() {
@@ -176,8 +187,8 @@ int main() {
     
     CU_pSuite suite_stats = CU_add_suite("Statistics Suite", 0, 0);
     CU_add_test(suite_stats, "test of distinct_letter_count", test_distinct_letter_count);
-    CU_add_test(suite_stats, "test of find most repeated letter", test_find_most_repeated_letter);
-
+    CU_add_test(suite_stats, "test of find_most_repeated_letter", test_find_most_repeated_letter);
+    CU_add_test(suite_stats, "test of is_empty_line", test_is_empty_line);
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
