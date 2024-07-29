@@ -51,7 +51,6 @@ void free_word_list(LinkedList *word_list) {
         word_list->word_count--;
     }
     word_list->head = NULL;
-    word_list->tail = NULL;
 }
 
 void print_list(const LinkedList *word_list) {

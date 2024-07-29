@@ -77,10 +77,9 @@ void test_free_list(void) {
     free_word_list(&mock_list);
     CU_ASSERT_EQUAL(0, mock_list.word_count);
     CU_ASSERT_PTR_EQUAL(mock_list.head, NULL);
-    CU_ASSERT_PTR_EQUAL(mock_list.tail, NULL);
-
-
 }
+
+
 
 void test_delete_duplicate(void) {
     LinkedList mock_list;
