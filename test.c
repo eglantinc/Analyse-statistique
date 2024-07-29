@@ -134,8 +134,6 @@ void test_distinct_letter_count(void) {
     insert_in_order(&mock_list, word5);
 
     CU_ASSERT_EQUAL(14, distinct_letter_count(&mock_list));
-
-
 }
 
 void test_find_most_repeated_letter(void) {

@@ -91,17 +91,6 @@ FILE *validate_output_file(char **argv);
 */
 void validate_argv(int argc, char **argv);
 
-
-/**
- * Ajouter un mot venant d'un fichier dans 
- * la liste chainee
- * 
- * @param file La liste de mots
- * @param word_list La liste de mots
- */
-void insert_word_from_file(FILE *file, LinkedList *word_list);
-
-
 /**
  * Point d'entrée du programme.
  *

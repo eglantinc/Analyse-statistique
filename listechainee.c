@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "listechainee.h"
+#include "main.h"
 
 void initialize_list(LinkedList *word_list) {
     word_list->head = NULL;
@@ -120,6 +121,23 @@ void insert_in_order(LinkedList *word_list, const char *new_word) {
     }
 
     word_list->word_count++;
+}
+
+
+void insert_word_from_file(FILE *file, LinkedList *word_list) {
+    char line[MAX_CHAR + 1];
+    char line_copy[MAX_CHAR + 1];
+    while (fgets(line, sizeof(line),file)) {
+        strcpy(line_copy, line);
+        char *word = strtok(line_copy, " \n");
+        while (word != NULL) {
+            for (int i = 0; word[i] != '\0'; i++) {
+                validate_letters_in_word(word[i]);
+            }
+            insert_in_order(word_list, word);
+            word = strtok(NULL, " \n");
+        }
+    }
 }
 
 

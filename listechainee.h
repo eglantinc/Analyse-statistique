@@ -1,6 +1,6 @@
 #ifndef LISTECHAINEE_H
 #define LISTECHAINEE_H
-
+#include <stdio.h>
 /*
  * Module pour: listechainee.c
  *
@@ -83,6 +83,16 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node);
  * @param *new_node La nouveau mot a ajouter
  */
 void insert_in_order(LinkedList *word_list, const char *new_word);
+
+/**
+ * Ajouter un mot venant d'un fichier dans
+ * la liste chainee
+ *
+ * @param file La liste de mots
+ * @param word_list La liste de mots
+ */
+void insert_word_from_file(FILE *file, LinkedList *word_list);
+
 
 
 #endif 
