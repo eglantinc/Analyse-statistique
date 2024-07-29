@@ -1,6 +1,8 @@
 #include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include "listechainee.h"
+#include <stdbool.h>
+#include "statistiques.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -115,6 +117,31 @@ void test_delete_duplicate(void) {
 
 }
 
+void test_distinct_letter_count(void) {
+    LinkedList mock_list;
+    initialize_list(&mock_list);
+
+    CU_ASSERT(mock_list.word_count == 0);
+    const char *word1 = "AVION";
+    const char *word2 = "CHAT";
+    const char *word3 = "GLACE";
+    const char *word4 = "LUNE";
+    const char *word5 = "MAISON";
+
+    insert_in_order(&mock_list, word1);
+    insert_in_order(&mock_list, word2);
+    insert_in_order(&mock_list, word3);
+    insert_in_order(&mock_list, word4);
+    insert_in_order(&mock_list, word5);
+
+    CU_ASSERT_EQUAL(14, distinct_letter_count(&mock_list));
+
+
+}
+
+
+
+
 int main() {
     CU_initialize_registry();
 
@@ -125,6 +152,10 @@ int main() {
     CU_add_test(suite, "test of insert_in_order", test_insert_in_order);
     CU_add_test(suite, "test of delete_duplicate", test_delete_duplicate);
     CU_add_test(suite, "test of free_word_list", test_free_list);
+    
+    CU_pSuite suite_stats = CU_add_suite("Statistics Suite", 0, 0);
+    CU_add_test(suite_stats, "test of distinct_letter_count", test_distinct_letter_count);
+
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
