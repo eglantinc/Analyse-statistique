@@ -39,6 +39,14 @@ void initialize_list(LinkedList *word_list);
 void print_empty_list_message(const LinkedList *word_list);
 
 /**
+ * Libere allocation de memoire de chaque noeud
+ * de la liste de mots
+ *
+ * @params *head Un pointeur sur la tete de la liste
+ */
+void free_word_list(Node *head);
+
+/**
  * Supprime les mots en double et ne garde qu'un seul 
  * exemplaire de chaque mot dans la liste
  *
@@ -76,13 +84,6 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node);
  */
 void insert_in_order(LinkedList *word_list, const char *new_word);
 
-/**
- * Libere allocation de memoire de chaque noeud 
- * de la liste de mots
- *
- * @params *head Un pointeur sur la tete de la liste
- */
-void free_list(Node *head);
 
 #endif 
 
