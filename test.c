@@ -201,8 +201,6 @@ void test_count_lines(void) {
 
 
     CU_ASSERT_EQUAL(24, count_lines(file));
-
-
 }
 
 
