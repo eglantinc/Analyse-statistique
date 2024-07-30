@@ -1,0 +1,66 @@
+        -:    0:Source:helper.c
+        -:    0:Graph:helper.gcno
+        -:    0:Data:helper.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <ctype.h>
+        -:    4:#include <string.h>
+        -:    5:#include <errno.h>
+        -:    6:#include "main.h"
+        -:    7:#include "helper.h"
+        -:    8:
+        -:    9:
+    #####:   10:void print_usage(void) {
+    #####:   11:    fprintf(stderr, USAGE, "tri", "tri");
+    #####:   12:}
+        -:   13:
+        -:   14:
+      792:   15:void validate_letters_in_word(char char_in_word) {
+      792:   16:    if (!isalpha(char_in_word) || !isupper(char_in_word)) {
+    #####:   17:        fprintf(stderr, "Erreur, tous les mots du fichiers doivent "
+        -:   18:                "être des lettres majuscules sans caractères accentués\n");
+    #####:   19:        exit(EXIT_FAILURE);
+        -:   20:    }
+      792:   21:}
+        -:   22:
+    #####:   23:void print_fopen_error(FILE *file) {
+    #####:   24:    if (file == NULL) {
+    #####:   25:         perror("Erreur lors de l'ouverture du fichier.\n");
+    #####:   26:         fprintf(stderr, "Erreur: %s\n", strerror(errno));
+    #####:   27:         exit(EXIT_FAILURE);
+        -:   28:     }
+    #####:   29:}
+        -:   30:
+        -:   31:
+    #####:   32:void validate_argc(int argc) {
+    #####:   33:    if (argc != 2 && argc != 4) {
+    #####:   34:        fprintf(stderr, "Ce programme prends soit 2 arguments, soit 4 arguments.\n");
+    #####:   35:        print_usage();
+    #####:   36:        exit(EXIT_FAILURE);
+        -:   37:    }
+    #####:   38:}
+        -:   39:
+    #####:   40:FILE *validate_input_file(char **argv) {
+    #####:   41:    FILE *file = fopen(argv[1], "r");
+    #####:   42:    print_fopen_error(file);
+    #####:   43:    return file;
+        -:   44:}
+        -:   45:
+    #####:   46:FILE *validate_output_file(char **argv) {
+    #####:   47:    FILE *file = fopen(argv[3], "w");
+    #####:   48:    print_fopen_error(file);
+    #####:   49:    return file;
+        -:   50:}
+        -:   51:
+    #####:   52:void validate_argv(int argc, char **argv) {
+    #####:   53:    if (argc == 4) {
+    #####:   54:        if (strcmp(argv[2], "-S") != 0) {
+    #####:   55:            fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
+    #####:   56:            print_usage();
+    #####:   57:            exit(EXIT_FAILURE);
+        -:   58:        }
+    #####:   59:    } 
+    #####:   60:}
+        -:   61:

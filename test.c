@@ -205,26 +205,47 @@ void test_count_lines(void) {
 
 
 int main(void) {
-    CU_initialize_registry();
+    if (CUE_SUCCESS != CU_initialize_registry())
+        return CU_get_error();
 
-    CU_pSuite suite = CU_add_suite("LinkedList Suite", 0, 0);
-    CU_add_test(suite, "test of initialize_list", test_initialize_list);
-    CU_add_test(suite, "test of insert_into_empty_list", test_insert_into_empty_list);
-    CU_add_test(suite, "test of create_node", test_create_node);
-    CU_add_test(suite, "test of insert_in_order", test_insert_in_order);
-    CU_add_test(suite, "test of delete_duplicate", test_delete_duplicate);
-    CU_add_test(suite, "test of free_word_list", test_free_list);
-    CU_add_test(suite, "test of insert_word_from_file", test_insert_word_from_file);
-    
-    CU_pSuite suite_stats = CU_add_suite("Statistics Suite", 0, 0);
-    CU_add_test(suite_stats, "test of distinct_letter_count", test_distinct_letter_count);
-    CU_add_test(suite_stats, "test of find_most_repeated_letter", test_find_most_repeated_letter);
-    CU_add_test(suite_stats, "test of is_empty_line", test_is_empty_line);
-    CU_add_test(suite_stats, "test of count_lines", test_count_lines);
+    CU_pSuite suite = CU_add_suite("LinkedList Suite", NULL, NULL);
+    if (NULL == suite) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if (NULL == CU_add_test(suite, "test of initialize_list", test_initialize_list) || 
+        NULL == CU_add_test(suite, "test of insert_into_empty_list", test_insert_into_empty_list)||
+        NULL == CU_add_test(suite, "test of create_node", test_create_node) ||
+        NULL == CU_add_test(suite, "test of insert_in_order", test_insert_in_order) ||
+        NULL == CU_add_test(suite, "test of delete_duplicate", test_delete_duplicate) ||
+        NULL == CU_add_test(suite, "test of free_word_list", test_free_list) ||
+        NULL == CU_add_test(suite, "test of insert_word_from_file", test_insert_word_from_file)) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+   
+    CU_pSuite suite_stats = CU_add_suite("Statistics Suite", NULL, NULL);
+    if (NULL == suite_stats) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if (NULL == CU_add_test(suite_stats, "test of distinct_letter_count", 
+        test_distinct_letter_count) || NULL == CU_add_test(suite_stats, 
+        "test of find_most_repeated_letter", test_find_most_repeated_letter) ||
+        NULL == CU_add_test(suite_stats, "test of is_empty_line", test_is_empty_line) ||
+        NULL == CU_add_test(suite_stats, "test of count_lines", test_count_lines)) {
+
+        CU_cleanup_registry();
+        return CU_get_error();
+        
+    }
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
-
     CU_cleanup_registry();
-    return 0;
+    return CU_get_error();
+    
 }
