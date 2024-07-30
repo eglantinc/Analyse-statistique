@@ -84,12 +84,6 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node);
  */
 void insert_in_order(LinkedList *word_list, const char *new_word);
 
-/**
- * Ajoute un noeud dans une liste vide
- *
- * @param word_list La liste de mots
- */
-void validate_letters_in_word(char char_in_word);
 
 /**
  * Ajouter un mot venant d'un fichier dans

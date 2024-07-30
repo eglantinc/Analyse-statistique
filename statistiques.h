@@ -16,6 +16,7 @@
 
 #include "listechainee.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  *  Vérifie si une ligne de est vide ou non
