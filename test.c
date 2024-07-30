@@ -1,4 +1,3 @@
-#include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include "listechainee.h"
 #include <stdbool.h>
