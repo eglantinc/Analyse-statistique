@@ -1,6 +1,16 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+/*
+ * Module pour: helper.c
+ *
+ * Description: Module de support pour le main composé
+ * des fonctions extraites de la fonction main.
+ *
+ * Auteure: Églantine Clervil
+ * Date: 11 aout 2024
+ */
+
 #include <stdio.h>
 
 /**
