@@ -1,6 +1,6 @@
 #ifndef LISTECHAINEE_H
 #define LISTECHAINEE_H
-
+#include <stdio.h>
 /*
  * Module pour: listechainee.c
  *
@@ -37,6 +37,14 @@ void initialize_list(LinkedList *word_list);
  * @param *word_list La liste de mots
  */
 void print_empty_list_message(const LinkedList *word_list);
+
+/**
+ * Libere allocation de memoire de chaque noeud
+ * de la liste de mots
+ *
+ * @params *head Un pointeur sur la tete de la liste
+ */
+void free_word_list(LinkedList *word_list);
 
 /**
  * Supprime les mots en double et ne garde qu'un seul 
@@ -76,13 +84,17 @@ void insert_into_empty_list(LinkedList *word_list, Node *new_node);
  */
 void insert_in_order(LinkedList *word_list, const char *new_word);
 
+
 /**
- * Libere allocation de memoire de chaque noeud 
- * de la liste de mots
+ * Ajouter un mot venant d'un fichier dans
+ * la liste chainee
  *
- * @params *head Un pointeur sur la tete de la liste
+ * @param file La liste de mots
+ * @param word_list La liste de mots
  */
-void free_list(Node *head);
+void insert_word_from_file(FILE *file, LinkedList *word_list);
+
+
 
 #endif 
 
