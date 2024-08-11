@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include "helper.h"
 #include "listechainee.h"
-#include "main.h"
 
 void initialize_list(LinkedList *word_list) {
     word_list->head = NULL;

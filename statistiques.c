@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "statistiques.h"
-#include "main.h"
+#include "helper.h"
 
 bool is_empty_line(const char *line) {
     for (unsigned int i = 0; line[i] != '\0'; i++) {

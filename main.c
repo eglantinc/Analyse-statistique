@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "main.h"
 #include "helper.h"
 #include "listechainee.h"
 #include "statistiques.h"
