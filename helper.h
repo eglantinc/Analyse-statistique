@@ -31,6 +31,7 @@
 
 
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  * Affiche le manuel d'utilisation du programme
@@ -43,7 +44,7 @@ void print_usage(void);
  * 
  * @param argv Les arguments de la ligne de commande.
  */
-void validate_argc(int argc);
+bool validate_argc(int argc);
 
 /**
  * Ajoute un noeud dans une liste vide
@@ -84,5 +85,7 @@ FILE *validate_output_file(char **argv);
  * @param argc Le nombre d'arguments.
  * @param argv Les arguments de la ligne de commande.
 */
-void validate_argv(int argc, char **argv);
+bool validate_argv(int argc, char **argv);
+
+void validate_inputs(int argc, char **argv);
 #endif // VALIDATE_H
