@@ -64,6 +64,9 @@ Pour avoir le fichier `README.md` sous format html, utilisez :
 make html
 ```
 
+```
+make clean
+```
 Pour nettoyer le répertoire, supprimer les fichiers objets (`.o`), les fichiers de données de couverture (`.gcda`, `.gcno`, `.gcov`), et d'autres fichiers générés lors de la compilation ou des tests.
 
 ## Utilisation
@@ -90,6 +93,31 @@ UNIVERS
 
 Le fichier `stats.txt` contiendra les statistiques spécifiées.
 
+```
+$ cat stats.txt
+Nombre de mots avec dupplication: 120
+Nombre de mots sans dupplication: 5
+Nombre de lignes dans le fichier: 24
+Nombre de lettres distinctes dans la liste: 15
+La lettre la plus fréquente: E
+```
+
+Dans le cas où le fichier d'entrée est vide, donc la liste est vide, voici le comportement :
+```
+$ ./tri empty_file.txt -S stats.txt
+
+La liste de mots est vide
+```
+
+```
+$ cat stats.txt
+
+Nombre de mots avec dupplication: 0
+Nombre de mots sans dupplication: 0
+Nombre de lignes dans le fichier: 0
+Nombre de lettres distinctes dans la liste: 0
+La lettre la plus fréquente: 
+```
 En cas d'erreur, voici le comportement au terminal :
 
 1. Nombre erroné d'argument en ligne de commande
@@ -141,72 +169,16 @@ Erreur: No such file or directory
 
 Voici le résultat lorsqu'on lance l'exécutable `./test` :
 ```  
-CUnit - A unit testing framework for C - Version 2.1-3
-http://cunit.sourceforge.net/
+[...]
+Run Summary:    Type  Total    Ran Passed Failed Inactive
+              suites      3      3    n/a      0        0
+               tests     13     13     13      0        0
+             asserts     48     48     48      0      n/a
 
-Suite: LinkedList Suite
-Test: test of initialize_list ...passed
-Test: test of insert_into_empty_list ...passed
-Test: test of create_node ...passed
-Test: test of insert_in_order ...passed
-Test: test of delete_duplicate ...passed
-Test: test of free_word_list ...passed
-Test: test of insert_word_from_file ...passed
-
-Suite: Statistics Suite
-Test: test of distinct_letter_count ...passed
-Test: test of find_most_repeated_letter ...passed
-Test: test of is_empty_line ...passed
-Test: test of count_lines ...passed
-
-Run Summary:  Type  Total  Ran Passed Failed Inactive
-suites  2  2  n/a  0  0
-tests 11 11 11  0  0
-asserts 40 40 40  0  n/a
-Elapsed time =  0.000 seconds
-```
-
-De même, voici le résultat lorsqu'on lance `make coverage` :
-
-```./test
-CUnit - A unit testing framework for C - Version 2.1-3
-http://cunit.sourceforge.net/
-
-Suite: LinkedList Suite
-Test: test of initialize_list ...passed
-Test: test of insert_into_empty_list ...passed
-Test: test of create_node ...passed
-Test: test of insert_in_order ...passed
-Test: test of delete_duplicate ...passed
-Test: test of free_word_list ...passed
-Test: test of insert_word_from_file ...passed
-
-Suite: Statistics Suite
-Test: test of distinct_letter_count ...passed
-Test: test of find_most_repeated_letter ...passed
-Test: test of is_empty_line ...passed
-Test: test of count_lines ...passed
-
-Run Summary:  Type  Total  Ran Passed Failed Inactive
-suites  2  2  n/a  0  0
-tests 11 11 11  0  0
-asserts 40 40 40  0  n/a
-Elapsed time =  0.000 seconds
-
-gcov listechainee.c statistiques.c helper.c
-File 'listechainee.c'
-Lines executed:92.47% of 93
-Creating 'listechainee.c.gcov'
-
-File 'statistiques.c'
-Lines executed:100.00% of 49
-Creating 'statistiques.c.gcov'
-
-File 'helper.c'
-Lines executed:80.56% of 36
-Creating 'helper.c.gcov'
+Elapsed time =    0.000 seconds
 ```
 ## Auteure
 
 Églantine Clervil - CLEE89530109
+
 
