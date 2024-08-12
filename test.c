@@ -2,6 +2,7 @@
 #include "listechainee.h"
 #include <stdbool.h>
 #include "statistiques.h"
+#include "helper.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -202,6 +203,14 @@ void test_count_lines(void) {
     CU_ASSERT_EQUAL(24, count_lines(file));
 }
 
+void test_validate_argc(void) {
+    CU_ASSERT(validate_argc(4));
+    CU_ASSERT(validate_argc(2));
+    CU_ASSERT(!validate_argc(3));
+    CU_ASSERT(!validate_argc(6));
+
+}
+
 
 
 int main(void) {
@@ -242,6 +251,22 @@ int main(void) {
         return CU_get_error();
         
     }
+
+
+    CU_pSuite suite_helper = CU_add_suite("Statistics Suite", NULL, NULL);
+    if (NULL == suite_helper) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if (NULL == CU_add_test(suite_stats, "test of validate_argc",
+        test_validate_argc)) {
+
+        CU_cleanup_registry();
+        return CU_get_error();
+
+    }
+
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
