@@ -87,5 +87,12 @@ FILE *validate_output_file(char **argv);
 */
 bool validate_argv(int argc, char **argv);
 
+/**
+ * Valider le argc et le argv de la ligne de commande
+ * et quitter si invalides
+ *
+ * @param argc Le nombre d'arguments.
+ * @param argv Les arguments de la ligne de commande.
+*/
 void validate_inputs(int argc, char **argv);
 #endif // VALIDATE_H
