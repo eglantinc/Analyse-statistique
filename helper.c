@@ -3,14 +3,13 @@
 #include <ctype.h>
 #include <string.h>
 #include <errno.h>
-#include "main.h"
+#include <stdbool.h>
 #include "helper.h"
 
 
 void print_usage(void) {
     fprintf(stderr, USAGE, "tri", "tri");
 }
-
 
 void validate_letters_in_word(char char_in_word) {
     if (!isalpha(char_in_word) || !isupper(char_in_word)) {
@@ -29,12 +28,13 @@ void print_fopen_error(FILE *file) {
 }
 
 
-void validate_argc(int argc) {
+bool validate_argc(int argc) {
     if (argc != 2 && argc != 4) {
-        fprintf(stderr, "Ce programme prends soit 2 arguments, soit 4 arguments.\n");
+        fprintf(stderr, "Ce programme prend soit 2 arguments, soit 4 arguments.\n");
         print_usage();
-        exit(EXIT_FAILURE);
+        return false;
     }
+    return true;
 }
 
 FILE *validate_input_file(char **argv) {
@@ -49,13 +49,24 @@ FILE *validate_output_file(char **argv) {
     return file;
 }
 
-void validate_argv(int argc, char **argv) {
+bool validate_argv(int argc, char **argv) {
     if (argc == 4) {
         if (strcmp(argv[2], "-S") != 0) {
             fprintf(stderr, "Option non reconnue : %s\n", argv[2]);
             print_usage();
-            exit(EXIT_FAILURE);
+            return false;
         }
-    } 
+    }
+    return true;
 }
+
+void validate_inputs(int argc, char **argv) {
+       if (!validate_argc(argc) || !validate_argv(argc, argv)) {
+        exit(EXIT_FAILURE);
+    }
+
+}
+
+
+
 

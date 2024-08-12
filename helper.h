@@ -11,7 +11,27 @@
  * Date: 11 aout 2024
  */
 
+#define MAX_CHAR 80
+
+#define USAGE "NAME\n" \
+               "    %s - Trie une liste de mots provenant d’un fichier d’entrée.\n" \
+               "    Une fois les mots triés, le programme affichera la liste ordonnée\n" \
+               "    sans doublons sur stdout.\n" \
+               "\n" \
+               "SYNOPSIS\n" \
+               "    ./%s entree.txt [-S sortie.txt]\n" \
+               "\n" \
+               "DESCRIPTION\n" \
+               "    entree.txt\n" \
+               "        Fichier contenant la liste des mots à trier.\n" \
+               "    -S sortie.txt\n" \
+               "        (Optionnel) Génère des statistiques et les enregistre\n" \
+               "        dans le fichier de sortie spécifié.\n"
+
+
+
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  * Affiche le manuel d'utilisation du programme
@@ -24,7 +44,7 @@ void print_usage(void);
  * 
  * @param argv Les arguments de la ligne de commande.
  */
-void validate_argc(int argc);
+bool validate_argc(int argc);
 
 /**
  * Ajoute un noeud dans une liste vide
@@ -65,5 +85,7 @@ FILE *validate_output_file(char **argv);
  * @param argc Le nombre d'arguments.
  * @param argv Les arguments de la ligne de commande.
 */
-void validate_argv(int argc, char **argv);
+bool validate_argv(int argc, char **argv);
+
+void validate_inputs(int argc, char **argv);
 #endif // VALIDATE_H

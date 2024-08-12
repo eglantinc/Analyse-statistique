@@ -2,6 +2,7 @@
 #include "listechainee.h"
 #include <stdbool.h>
 #include "statistiques.h"
+#include "helper.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -195,14 +196,33 @@ void test_insert_word_from_file(void) {
 
 void test_count_lines(void) {
     const char *file_name = "test.txt";
+    const char *file_name2 = "test_empty_line.txt";
     FILE *file = fopen(file_name, "r");
+    FILE *file2 = fopen(file_name2, "r");
     CU_ASSERT_PTR_NOT_NULL(file);
+    CU_ASSERT_PTR_NOT_NULL(file2);
 
 
     CU_ASSERT_EQUAL(24, count_lines(file));
+    CU_ASSERT_EQUAL(24, count_lines(file2));
 }
 
+void test_validate_argc(void) {
+    CU_ASSERT(validate_argc(4));
+    CU_ASSERT(validate_argc(2));
+    CU_ASSERT(!validate_argc(3));
+    CU_ASSERT(!validate_argc(6));
 
+}
+
+void test_validate_argv(void) {
+    int mock_argc = 4;
+    char *mock_argv[] = {"./tri", "test.txt", "-S", "output.txt"};
+    char *mock_argv2[] = {"./tri", "test.txt", "-s", "output.txt"};
+ 
+    CU_ASSERT(validate_argv(mock_argc, mock_argv));
+    CU_ASSERT(!validate_argv(mock_argc, mock_argv2));
+}
 
 int main(void) {
     if (CUE_SUCCESS != CU_initialize_registry())
@@ -242,6 +262,23 @@ int main(void) {
         return CU_get_error();
         
     }
+
+
+    CU_pSuite suite_helper = CU_add_suite("Statistics Suite", NULL, NULL);
+    if (NULL == suite_helper) {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if (NULL == CU_add_test(suite_helper, "test of validate_argc",
+        test_validate_argc) || NULL == CU_add_test(suite_helper, 
+        "test of validate_argv", test_validate_argv))  {
+
+        CU_cleanup_registry();
+        return CU_get_error();
+
+    }
+
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();

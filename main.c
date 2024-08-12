@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "main.h"
 #include "helper.h"
 #include "listechainee.h"
 #include "statistiques.h"
@@ -7,9 +6,7 @@
 
 int main (int argc, char **argv) { 
     LinkedList word_list = {NULL, NULL, 0};
-    
-    validate_argc(argc);
-    validate_argv(argc, argv);
+    validate_inputs(argc,argv);
     
     FILE *input_file = validate_input_file(argv);
     FILE *output_file = validate_output_file(argv);

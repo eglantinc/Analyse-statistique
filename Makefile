@@ -26,7 +26,7 @@ statistiques.o: statistiques.c statistiques.h
 helper.o: helper.c helper.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-main.o: main.c main.h
+main.o: main.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 test.o: test.c
