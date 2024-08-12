@@ -196,11 +196,15 @@ void test_insert_word_from_file(void) {
 
 void test_count_lines(void) {
     const char *file_name = "test.txt";
+    const char *file_name2 = "test_empty_line.txt";
     FILE *file = fopen(file_name, "r");
+    FILE *file2 = fopen(file_name2, "r");
     CU_ASSERT_PTR_NOT_NULL(file);
+    CU_ASSERT_PTR_NOT_NULL(file2);
 
 
     CU_ASSERT_EQUAL(24, count_lines(file));
+    CU_ASSERT_EQUAL(24, count_lines(file2));
 }
 
 void test_validate_argc(void) {
