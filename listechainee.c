@@ -20,7 +20,6 @@ void print_empty_list_message(const LinkedList *word_list) {
 }
 
 void delete_duplicate(LinkedList *word_list) {
-    print_empty_list_message(word_list);
     Node *current = word_list->head;
     while (current != NULL && current->next != NULL) {
         if (strcmp(current->word, current->next->word) == 0) {
