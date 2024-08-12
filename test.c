@@ -211,6 +211,15 @@ void test_validate_argc(void) {
 
 }
 
+void test_validate_argv(void) {
+    int mock_argc = 4;
+    char *mock_argv[] = {"./tri", "test.txt", "-S", "output.txt"};
+    char *mock_argv2[] = {"./tri", "test.txt", "-s", "output.txt"};
+ 
+    CU_ASSERT(validate_argv(mock_argc, mock_argv));
+    CU_ASSERT(!validate_argv(mock_argc, mock_argv2));
+}
+
 
 
 int main(void) {
@@ -259,8 +268,9 @@ int main(void) {
         return CU_get_error();
     }
 
-    if (NULL == CU_add_test(suite_stats, "test of validate_argc",
-        test_validate_argc)) {
+    if (NULL == CU_add_test(suite_helper, "test of validate_argc",
+        test_validate_argc)|| NULL == CU_add_test(suite_helper, 
+        "test of validate_argv", test_validate_argv)) {
 
         CU_cleanup_registry();
         return CU_get_error();
