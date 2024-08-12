@@ -64,10 +64,10 @@ Pour avoir le fichier `README.md` sous format html, utilisez :
 make html
 ```
 
+Pour nettoyer le répertoire, supprimer les fichiers objets (`.o`), les fichiers de données de couverture (`.gcda`, `.gcno`, `.gcov`), et d'autres fichiers générés lors de la compilation ou des tests, utilisez : 
 ```
 make clean
 ```
-Pour nettoyer le répertoire, supprimer les fichiers objets (`.o`), les fichiers de données de couverture (`.gcda`, `.gcno`, `.gcov`), et d'autres fichiers générés lors de la compilation ou des tests.
 
 ## Utilisation
 
